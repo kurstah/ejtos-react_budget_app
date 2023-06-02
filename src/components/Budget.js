@@ -21,8 +21,8 @@ const Budget = () => {
   };
 
   return (
-    <div className='alert alert-secondary'>
-
+    <div className='alert alert-secondary' style={{width: '300px'}}>
+  <label for='budget'>Budget:£</label>
       <input
         required='required'
         type='number'
@@ -30,7 +30,7 @@ const Budget = () => {
         defaultValue={currentBudget}
         step='10'
         max='20000'
-        style={{ marginLeft: '2rem', size: 10 }}
+        style={{ size: 10 }}
         onChange={handleBudgetChange}
       />
     </div>
