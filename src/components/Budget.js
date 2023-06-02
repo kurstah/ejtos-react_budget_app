@@ -1,10 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context/AppContext';
 
+const CurrencySymbol = {
+  dollar: '$',
+  pound: '£',
+  euro: '€',
+  rupee: '₹'
+};
+
 const Budget = () => {
-  const { budget, expenses } = useContext(AppContext);
+  const { budget, expenses, currency } = useContext(AppContext);
   const [currentBudget, setCurrentBudget] = useState(budget);
 
+  useEffect(() => {
+    setCurrentBudget(budget);
+  }, [budget]);
 
   const totalExpenses = expenses.reduce((total, item) => {
     return (total += item.cost);
@@ -15,19 +25,18 @@ const Budget = () => {
     if (newBudget < totalExpenses) {
       alert('You cannot reduce the budget value lower than the spending');
     } else {
-
       setCurrentBudget(newBudget);
     }
   };
 
   return (
-    <div className='alert alert-secondary' style={{width: '300px'}}>
-  <label for='budget'>Budget:£</label>
+    <div className='alert alert-secondary' style={{ width: '300px' }}>
+      <label htmlFor='budget'>Budget: {CurrencySymbol[currency]}</label>
       <input
         required='required'
         type='number'
         id='budget'
-        defaultValue={currentBudget}
+        value={currentBudget}
         step='10'
         max='20000'
         style={{ size: 10 }}

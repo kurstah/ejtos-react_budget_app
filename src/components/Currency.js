@@ -1,27 +1,25 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
-const Currency = (youKnow) => {
+const Currency = () => {
+  const { setCurrency } = useContext(AppContext);
 
-    return (
-   
-      <div>
-   <label> Currency </label>
-        <select id='verde' className="custom-select">
-   
-          <option value="dollar">$ Dollar</option>
-   
-          <option value="pound">£ Pound</option>
-   
-          <option value="euro">€ Euro</option>
+  const handleCurrencyChange = (event) => {
+    const selectedCurrency = event.target.value;
+    setCurrency(selectedCurrency);
+  };
 
-          <option value="ruppee">₹ Ruppee</option>
-        </select>
+  return (
+    <div>
+      <label>Currency</label>
+      <select className="custom-select" onChange={handleCurrencyChange}>
+        <option value="dollar">$ Dollar</option>
+        <option value="pound">£ Pound</option>
+        <option value="euro">€ Euro</option>
+        <option value="rupee">₹ Rupee</option>
+      </select>
+    </div>
+  );
+};
 
-      </div>
-   
-    );
-   
-   };
-   
-   export default Currency;
+export default Currency;
